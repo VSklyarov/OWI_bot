@@ -1,0 +1,15 @@
+{
+  "price_krw": 79700000,
+  "brand": "BMW",
+  "model": "X5 (G05) xDrive 40i xLine",
+  "engine_cc": 2998,
+  "horsepower": 340,
+  "fuel_type": "gasoline",
+  "drive": "4WD",
+  "body_type": "SUV",
+  "first_registration": "2023-02",
+  "mileage_km": 33000,
+  "is_leasing": true,
+  "is_sold_or_pledge": false,
+  "damages": []
+}

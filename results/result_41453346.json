@@ -1,0 +1,15 @@
+{
+  "price_krw": 103000000,
+  "brand": "BMW",
+  "model": "X5 (G05) xDrive 50e xLine",
+  "engine_cc": 2998,
+  "horsepower": 489,
+  "fuel_type": "hybrid",
+  "drive": "4WD",
+  "body_type": "SUV",
+  "first_registration": "2025-06",
+  "mileage_km": 20798,
+  "is_leasing": false,
+  "is_sold_or_pledge": false,
+  "damages": []
+}

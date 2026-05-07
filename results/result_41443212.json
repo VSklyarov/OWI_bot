@@ -1,0 +1,20 @@
+{
+  "price_krw": 63000000,
+  "brand": "BMW",
+  "model": "X5 (G05) xDrive 30d M 스포츠",
+  "engine_cc": 2993,
+  "horsepower": 286,
+  "fuel_type": "diesel",
+  "drive": "4WD",
+  "body_type": "SUV",
+  "first_registration": "2022-03",
+  "mileage_km": 138332,
+  "is_leasing": false,
+  "is_sold_or_pledge": false,
+  "damages": [
+    {
+      "part": "Front fender (left)",
+      "type": "replace"
+    }
+  ]
+}
