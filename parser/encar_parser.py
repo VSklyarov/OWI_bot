@@ -21,6 +21,7 @@ not a failure (they are simply missing for some listing types).
 from __future__ import annotations
 
 import logging
+import re
 import time
 from typing import Any, Dict, List, Optional
 
@@ -227,6 +228,19 @@ def _coalesce_str(*vals: object) -> str:
     return ""
 
 
+_HANGUL_RE = re.compile(r"[\uAC00-\uD7A3]+")
+
+
+def _strip_hangul(text: str) -> str:
+    """Remove Hangul syllables from text, keep latin/numbers/punct."""
+    if not text:
+        return ""
+    s = _HANGUL_RE.sub("", text)
+    # normalize whitespace left after removal
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+
 # ---------------------------------------------------------------------------
 # Damages
 # ---------------------------------------------------------------------------
@@ -395,7 +409,16 @@ def parse_encar_url(
         model_name = _coalesce_str(category.get("modelName"))
         grade_name = _coalesce_str(category.get("gradeName"))
         grade_detail = _coalesce_str(category.get("gradeDetailName"))
-        model_full = " ".join(p for p in (model_name, grade_name, grade_detail) if p)
+
+        # Prefer English grade names when available to avoid Korean text in `model`.
+        grade_en = _coalesce_str(category.get("gradeEnglishName"))
+        grade_detail_en = _coalesce_str(category.get("gradeDetailEnglishName"))
+        grade_for_model = grade_en or grade_name
+        grade_detail_for_model = grade_detail_en or grade_detail
+
+        model_full = " ".join(p for p in (model_name, grade_for_model, grade_detail_for_model) if p)
+        # Final safety: if Encar returned Korean text, strip Hangul so the output stays ASCII/Latin.
+        model_full = _strip_hangul(model_full)
         if not model_full:
             raise ParseError("Cannot derive model name (modelName/gradeName missing)")
 
